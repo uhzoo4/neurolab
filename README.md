@@ -1,3 +1,38 @@
+# NeuroLab
+
+NeuroLab is an interactive neural network laboratory designed to make machine learning visible.
+
+Instead of treating neural networks as black boxes, NeuroLab allows users to observe how a network learns in real time through live visualizations of neuron activations, weight updates, training metrics, and loss reduction.
+
+Built with React, TypeScript, and a custom neural network engine, NeuroLab focuses on education, experimentation, and intuitive understanding of neural network behavior.
+
+## Features
+
+* Custom neural network engine (no ML frameworks)
+* Feedforward propagation
+* Backpropagation and SGD training
+* Real-time network visualization
+* Interactive training controls
+* Live training metrics
+* Loss tracking and visualization
+* Educational AI learning environment
+
+## Tech Stack
+
+* React
+* TypeScript
+* Vite
+* SVG Visualization
+* Custom Neural Network Engine
+
+## Vision
+
+Most machine learning tools help people build AI.
+
+NeuroLab helps people understand AI.
+
+The goal is to create an interactive environment where students, developers, and curious learners can watch a neural network learn step-by-step instead of simply observing the final result.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
