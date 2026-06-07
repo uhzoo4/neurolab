@@ -7,14 +7,22 @@ export class RingBuffer {
   }
 
   push(value: number) {
-    if (this.data.length >= this.capacity) {
+    if (this.data.length === this.capacity) {
       this.data.shift();
     }
 
     this.data.push(value);
   }
 
-  getValues() {
-    return this.data;
+  getValues(): number[] {
+    return [...this.data];
+  }
+
+  clear() {
+    this.data = [];
+  }
+
+  size(): number {
+    return this.data.length;
   }
 }

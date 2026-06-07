@@ -34,3 +34,8 @@
   stroke: #58a6ff;
   filter: drop-shadow(0 0 6px rgba(88, 166, 255, 0.4));
 }
+.selected-neuron {
+  stroke: #22d3ee;
+  stroke-width: 4px;
+  filter: drop-shadow(0 0 12px #22d3ee);
+}

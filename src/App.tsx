@@ -3,6 +3,7 @@ import { useSimulationState } from "./simulation/useSimulationState";
 import { useTrainingLoop } from "./simulation/useTrainingLoop";
 import { NetworkGraph } from "./components/NetworkGraph";
 import { useTilt } from "./hooks/useTilt";
+import{ LossGraph } from "./components/LossGraph";
 import "./App.css";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   useTrainingLoop({ state, dispatch });
 
   const { training } = state;
+  console.log(...state.history.getValues());
 
   return (
     <div className="container">
@@ -57,13 +59,25 @@ function App() {
           
           <div className="speed-control">
             <label>Speed Multiplier</label>
-            <select 
-              value={training.speedMultiplier}
-              onChange={(e) => {
-                const val = e.target.value === "MAX" ? "MAX" : Number(e.target.value);
-                dispatch({ type: "SET_SPEED", speedMultiplier: val });
-              }}
-            >
+            <label htmlFor="speed-select">
+  Speed Multiplier
+</label>
+
+<select
+  id="speed-select"
+  value={training.speedMultiplier}
+  onChange={(e) => {
+    const val =
+      e.target.value === "MAX"
+        ? "MAX"
+        : Number(e.target.value);
+
+    dispatch({
+      type: "SET_SPEED",
+      speedMultiplier: val,
+    });
+  }}
+> 
               <option value={1}>1x</option>
               <option value={10}>10x</option>
               <option value={100}>100x</option>
@@ -78,6 +92,8 @@ function App() {
               <NetworkGraph 
                 snapshot={state.snapshot} 
                 topology={state.topology.layerSizes} 
+                dispatch={dispatch}
+                selectedNeuron={state.ui.selectedNeuron}
               />
             ) : (
               <p style={{ color: '#9ca3af' }}>Loading network topology...</p>
@@ -85,6 +101,13 @@ function App() {
           </section>
         </div>
       </main>
+
+      <section className="panel loss-panel">
+        <h2>Training Loss</h2>
+        <LossGraph 
+        history={state.history.getValues()}
+         />
+      </section>
     </div>
   );
 }

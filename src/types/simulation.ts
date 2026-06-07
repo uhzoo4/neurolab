@@ -22,7 +22,10 @@ export interface SimulationState {
   snapshot: TrainingSnapshot | null;
   history: RingBuffer;
   ui: {
-    selectedNeuron: string | null;
+    selectedNeuron: {
+  layer: number;
+  index: number;
+} | null;
   };
 }
 

@@ -2,12 +2,17 @@ import { useMemo } from 'react';
 import type { TrainingSnapshot } from '../simulation/neuralNetwork';
 import './NetworkGraph.css';
 
+import type { Dispatch } from "react";
+import type { SimulationAction } from "../types/simulation";
+
 interface NetworkGraphProps {
   snapshot: TrainingSnapshot | null;
   topology: number[];
+  dispatch: Dispatch<SimulationAction>;
+  selectedNeuron: { layer: number; index: number } | null;
 }
 
-export function NetworkGraph({ snapshot, topology }: NetworkGraphProps) {
+export function NetworkGraph({ snapshot, topology, dispatch, selectedNeuron }: NetworkGraphProps) {
   const width = 800;
   const height = 600;
   const padding = 50;
@@ -60,13 +65,14 @@ export function NetworkGraph({ snapshot, topology }: NetworkGraphProps) {
           const weights = snapshot?.weights?.[l];
 
           return layer.map((node, i) => (
+        
             nextLayer.map((nextNode, j) => {
               const nextSize = topology[l + 1];
               const weight = weights ? weights[i * nextSize + j] : 0;
               
               const absWeight = Math.abs(weight);
               const opacity = snapshot ? Math.max(0.05, Math.min(absWeight, 1)) : 0.1;
-              const colorClass = weight > 0 ? 'connection-positive' : 'connection-negative';
+              const colorClass = weight > 0 ? 'connection-positive' : 'connection-negative';            
 
               return (
                 <line
@@ -94,11 +100,16 @@ export function NetworkGraph({ snapshot, topology }: NetworkGraphProps) {
 
           return layer.map((node, i) => {
             // 1. Neuron glow intensity = activation value
+            const isSelected =
+    selectedNeuron?.layer === l &&
+    selectedNeuron?.index === i;
+
             const rawActivation = activations ? activations[i] : 0;
             const intensity = Math.min(Math.max(Math.abs(rawActivation), 0), 1);
             
             const baseRadius = 15;
             const glowRadius = baseRadius + (intensity * 12 * glowMultiplier);
+
             
             // 4. Active neurons pulse slightly
             const isActive = intensity > 0.5;
@@ -120,14 +131,31 @@ export function NetworkGraph({ snapshot, topology }: NetworkGraphProps) {
                 />
                 {/* Core neuron */}
                 <circle
-                  cx={node.x}
-                  cy={node.y}
-                  r={baseRadius}
-                  className="neuron-core"
-                  style={{
-                    filter: isOutputLayer && isActive ? `drop-shadow(0 0 15px rgba(88, 166, 255, 0.9))` : undefined
-                  }}
-                />
+   cx={node.x}
+  cy={node.y}
+  r={baseRadius}
+  className={`neuron-core ${
+  isSelected ? "selected-neuron" : ""
+}`}
+  onClick={() => {
+  dispatch({
+    type: "SELECT_NEURON",
+    payload: {
+      layer: l,
+      index: i,
+    },
+  });
+
+  console.log("Selected", l, i);
+}}
+  style={{
+    cursor: "pointer",
+    filter:
+      isOutputLayer && isActive
+        ? `drop-shadow(0 0 15px rgba(88,166,255,0.9))`
+        : undefined
+  }}
+/>
               </g>
             );
           });
