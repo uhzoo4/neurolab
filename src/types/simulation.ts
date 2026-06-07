@@ -35,7 +35,7 @@ export type SimulationAction =
   | { type: "SET_STATUS"; status: TrainingStatus }
   | { type: "SET_SPEED"; speedMultiplier: number | "MAX" }
   | { type: "SET_EPOCHS"; totalEpochs: number }
-  | { type: "SELECT_NEURON"; payload: string | null }
+ | { type: "SELECT_NEURON"; payload: { layer: number; index: number } | null }
   | { type: "RESET" }
   | { type: "TRAINING_COMPLETE" }
   | { type: "TRAINING_ERROR"; error: Error };
