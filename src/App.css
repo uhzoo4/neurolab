@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #2a1147 0%, #0d0914 100%);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, #c084fc, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  padding-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+.dashboard {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.network-card {
+  flex: 2;
+  min-width: 300px;
+  max-width: 700px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.panel:hover {
+  transform: translateY(-5px);
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #e5e7eb;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #aa3bff, #7e22ce);
+  color: white;
+  box-shadow: 0 4px 15px rgba(170, 59, 255, 0.4);
+}
+
+.btn.primary:hover {
+  background: linear-gradient(135deg, #b854ff, #8b2ee0);
+  box-shadow: 0 6px 20px rgba(170, 59, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn.outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #d1d5db;
+}
+
+.btn.outline:hover {
+  border-color: #fca5a5;
+  color: #fca5a5;
+  background: rgba(252, 165, 165, 0.05);
+  transform: translateY(-2px);
+}
+
+.speed-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.speed-control label {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.speed-control select {
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.speed-control select:focus {
+  border-color: #aa3bff;
+}
+
+.speed-control select option {
+  background: #1a1a2e;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.metric-card {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 18px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.metric-card .label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.metric-card .value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  word-break: break-all;
+}
+
+.status-running {
+  color: #34d399;
+  text-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.status-paused {
+  color: #fbbf24;
+}
+
+.status-idle {
+  color: #9ca3af;
+}
+
+.status-complete {
+  color: #60a5fa;
+  text-shadow: 0 0 12px rgba(96, 165, 250, 0.5);
+}
+
+.architecture {
+  font-size: 1.1rem !important;
+  color: #c084fc;
+  letter-spacing: 1px;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
