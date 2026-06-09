@@ -5,6 +5,7 @@ import { NetworkGraph } from "./components/NetworkGraph";
 import { useTilt } from "./hooks/useTilt";
 import{ LossGraph } from "./components/LossGraph";
 import "./App.css";
+import StatsPanel from "./components/StatsPanel";
 import NeuronInspector from "./components/NeuronInspector";
 
 function App() {
@@ -32,6 +33,13 @@ function App() {
       </header>
 
       <main className="dashboard">
+        <StatsPanel
+  currentEpoch={state.training.currentEpoch}
+  totalEpochs={state.training.totalEpochs}
+  loss={state.snapshot?.lossValue ?? null}
+  speedMultiplier={state.training.speedMultiplier}
+  status={state.training.status}
+/>
         <section className="panel controls-panel">
           <h2>Controls</h2>
           <div className="button-group">
