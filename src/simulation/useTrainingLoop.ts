@@ -25,11 +25,14 @@ export function useTrainingLoop({ state, dispatch }: UseTrainingLoopProps): void
     }
 
     // Default to XOR dataset for the MVP
-    const dataset = Datasets.xor();
-
     const loop = () => {
       const currentState = stateRef.current;
       const { network, training } = currentState;
+
+      const dataset =
+  currentState.dataset === "circle"
+    ? Datasets.circle()
+    : Datasets.xor();
 
       // Failsafe exit
       if (!network || training.status !== "running") return;

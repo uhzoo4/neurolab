@@ -33,6 +33,7 @@ const createInitialState = (): SimulationState => ({
   ui: {
     selectedNeuron: null,
   },
+  dataset: "xor",
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -100,6 +101,12 @@ const reducer = (state: SimulationState, action: SimulationAction): SimulationSt
           stepsPerFrame: computeStepsPerFrame(action.speedMultiplier),
         },
       };
+
+      case "SET_DATASET":
+  return {
+    ...state,
+    dataset: action.dataset,
+  };
 
     case "SET_EPOCHS":
       return {

@@ -6,6 +6,7 @@ import { useTilt } from "./hooks/useTilt";
 import{ LossGraph } from "./components/LossGraph";
 import "./App.css";
 import StatsPanel from "./components/StatsPanel";
+import DatasetSelector from "./components/DatasetSelector";
 import NeuronInspector from "./components/NeuronInspector";
 
 function App() {
@@ -33,13 +34,6 @@ function App() {
       </header>
 
       <main className="dashboard">
-        <StatsPanel
-  currentEpoch={state.training.currentEpoch}
-  totalEpochs={state.training.totalEpochs}
-  loss={state.snapshot?.lossValue ?? null}
-  speedMultiplier={state.training.speedMultiplier}
-  status={state.training.status}
-/>
         <section className="panel controls-panel">
           <h2>Controls</h2>
           <div className="button-group">
@@ -87,6 +81,7 @@ function App() {
     });
   }}
 > 
+
               <option value={1}>1x</option>
               <option value={10}>10x</option>
               <option value={100}>100x</option>
@@ -110,6 +105,34 @@ function App() {
           </section>
         </div>
       </main>
+       <StatsPanel
+  currentEpoch={state.training.currentEpoch}
+  totalEpochs={state.training.totalEpochs}
+  loss={state.snapshot?.lossValue ?? null}
+  speedMultiplier={state.training.speedMultiplier}
+  status={state.training.status}
+/>
+
+<DatasetSelector
+  currentDataset={state.dataset}
+  onChange={(dataset) => {
+  dispatch({
+    type: "SET_DATASET",
+    dataset,
+  });
+
+  dispatch({
+    type: "RESET",
+  });
+
+  dispatch({
+    type: "SET_STATUS",
+    status: "running",
+  });
+}}
+/>
+
+<div ref={tiltRef} className="network-card"></div>
 
       <section className="panel loss-panel">
         <h2>Training Loss</h2>
@@ -120,7 +143,9 @@ function App() {
 
       <section className="panel inspector-panel">
         <h2>Neuron Inspector</h2>
-        <NeuronInspector selectedNeuron={state.ui.selectedNeuron} />
+        <NeuronInspector selectedNeuron={state.ui.selectedNeuron}
+  snapshot={state.snapshot}
+         />
       </section>
     </div>
   );

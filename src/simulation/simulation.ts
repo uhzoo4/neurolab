@@ -23,6 +23,7 @@ export interface SimulationState {
   ui: {
     selectedNeuron: { layer: number; index: number } | null;
   };
+  dataset: "xor" | "circle";
 }
 
 export type SimulationAction =
@@ -37,6 +38,10 @@ export type SimulationAction =
       layer: number;
       index: number;
     } | null;
+  }
+  | {
+    type: "SET_DATASET";
+    dataset: "xor" | "circle";
   }
   | { type: "RESET" }
   | { type: "TRAINING_COMPLETE" }
