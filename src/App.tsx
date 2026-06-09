@@ -5,6 +5,7 @@ import { NetworkGraph } from "./components/NetworkGraph";
 import { useTilt } from "./hooks/useTilt";
 import{ LossGraph } from "./components/LossGraph";
 import "./App.css";
+import NeuronInspector from "./components/NeuronInspector";
 
 function App() {
   const { state, dispatch } = useSimulationState();
@@ -107,6 +108,11 @@ function App() {
         <LossGraph 
         history={state.history.getValues()}
          />
+      </section>
+
+      <section className="panel inspector-panel">
+        <h2>Neuron Inspector</h2>
+        <NeuronInspector selectedNeuron={state.ui.selectedNeuron} />
       </section>
     </div>
   );
